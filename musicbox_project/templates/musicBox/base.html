@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+
+    <!-- Necessary meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Homepage (temp)</title>
+
+    <!-- Bootstrap main import -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    {% load static_files %}
+
+  </head>
+
+  <!-- Header to navigate website -->
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light bg-light text-dark sticky-top">
+        <div class="container-fluid">
+          <!-- App logo -->
+          <a class="navbar-brand" href="{% url musicbox:index %}">MusicBox</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Browsing options displayed in a dropdown -->
+          <div class="navbar navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <!-- Use .hover here (jQuery) -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{% url 'musicboxapp:browse' %}" id="navbarDropdown" role="button" data-bs-toggle="button">
+                  Browse
+                </a>
+                <ul class="dropdown-menu">
+                  <li> <a class="dropdown-item" href="{% url 'musicboxapp:genre' %}">Genres</a> </li>
+                  <li> <a class="dropdown-item" href="{% url 'musicboxapp:trending' %}">Trending</a> </li>
+                  <li> <a class="dropdown-item" href="{% url 'musicboxapp:popular' %}">Most Popular</a> </li>
+                  <li> <a class="dropdown-item" href="{% url 'musicboxapp:surprise_me' %}"></a> </li>
+                </ul>
+                <li class=""></li>
+            </ul>
+
+            <!-- Search bar -->
+            <form class="d-flex" method="GET" action="{% url 'musicboxapp:search' %}">
+              <input class="form-control me-2" type="search" placeholder="search for music">
+              <button class="btn btn-outline-success" type="submit" name="button">Search</button>
+            </form>
+
+            <!-- User profile-related buttons -->
+            <ul class="navbar-nav mr-auto">
+              </li>
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users:profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'musicboxapp:homepage' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'musicboxapp:add_review' %}">Write review</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <!-- Are registration and login handled by differnet pages? -->
+                  <a href="{% url 'users:register' %}">Login/Signup</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    {% block sidebar_block %}
+    {% endblock %}
+
+    {% block body_block %}
+    {% endblock %}
+
+    <footer>
+      <a class="float-right" href="#">Back to top</a>
+      <p>Author: WAD Team 9F</p>
+      <p><a href="mailto:2483920l@student.gla.ac.uk">Email the creators</a></p>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+  </body>
+</html>
