@@ -11,7 +11,7 @@
     <!-- Bootstrap main import -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    {% load static_files %}
+    {% load staticfiles %}
 
   </head>
 
@@ -21,7 +21,7 @@
       <nav class="navbar navbar-expand-md navbar-light bg-light text-dark sticky-top">
         <div class="container-fluid">
           <!-- App logo -->
-          <a class="navbar-brand" href="{% url musicbox:index %}">MusicBox</a>
+          <a class="navbar-brand" href="{% url 'musicboxapp:homepage' %}">MusicBox</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -35,7 +35,7 @@
                   Browse
                 </a>
                 <ul class="dropdown-menu">
-                  <li> <a class="dropdown-item" href="{% url 'musicboxapp:genre' %}">Genres</a> </li>
+                  <li> <a class="dropdown-item" href="{% url 'musicboxapp:genres' %}">Genres</a> </li>
                   <li> <a class="dropdown-item" href="{% url 'musicboxapp:trending' %}">Trending</a> </li>
                   <li> <a class="dropdown-item" href="{% url 'musicboxapp:popular' %}">Most Popular</a> </li>
                   <li> <a class="dropdown-item" href="{% url 'musicboxapp:surprise_me' %}"></a> </li>

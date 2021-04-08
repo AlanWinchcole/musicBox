@@ -5,9 +5,9 @@ from datetime import date, datetime
 
 class User(models.Model):
     MAX_LENGTH = 30
-    
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
+
     Profile_Picture = models.ImageField(upload_to='Profile_pic', blank=True)
     Location = models.CharField(max_length=MAX_LENGTH)
     Joined = models.DateField(auto_now_add=False, default=None, null=True)
@@ -35,7 +35,7 @@ class Album(models.Model):
 
     class Meta:
         verbose_name_plural = 'Albums'
-    
+
     def __str__(self):
         return self.Title
 
@@ -57,5 +57,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.user.username
-    
-    

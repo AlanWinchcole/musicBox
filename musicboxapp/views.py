@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.shortcuts import redirect
+from django.http import HttpResponse
 #from musicboxapp.bing_search import run_query
 
 def homepage(request):
@@ -11,7 +12,7 @@ def homepage(request):
     context_dict = {}
     context_dict['albums'] = albums_recently_reviewed
 
-    repsonse = render(request, 'musicboxapp/homepage.html', context=context_dict)
+    response = render(request, 'musicBox/homepage.html', context=context_dict)
     return response
 
 def album(request, album_name_slug):
@@ -19,7 +20,7 @@ def album(request, album_name_slug):
 
     try:
         album = Album.objects.get(slug=album_name_slug)
-        reviews = Review.objects.filter(album=album).order_by("-Review")
+        reviews = Review.objects.filter(album=album).order_by("-Date_Of_Review")
 
         context_dict['reviews'] = reviews
         context_dict['album'] = album
@@ -27,9 +28,9 @@ def album(request, album_name_slug):
         context_dict['album'] = None
         context_dict['reviews'] = None
 
-    return render(request, 'musicboxapp/album.html', context=context_dict)
-    
-    
+    return render(request, 'musicBox/album.html', context=context_dict)
+
+
 @login_required
 def add_review(request, album_name_slug):
     try:
@@ -120,7 +121,7 @@ def add_comment(request, album_name_slug):
 
     context_dict = {'album': album, 'comment': comment, 'new_comment': new_comment, 'form': form}
     return render(request, template, context=context_dict)
-        
+
 
 def search(request):
     result_list = []
@@ -131,6 +132,18 @@ def search(request):
             result_list = run_query(query)
 
     return render(request, 'musicboxapp/search.html', {'result_list': result_list})
-    
-    
-    
+
+def browse(request):
+    pass
+
+def browse_genres(request):
+    pass
+
+def trending_page(request):
+    pass
+
+def popular_page(request):
+    pass
+
+def surprise_me(request):
+    pass
