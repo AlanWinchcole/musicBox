@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.shortcuts import redirect
 from django.http import HttpResponse
-from django.view import View
-from django.utils.decorator import method_decorator
+from django.views import View
+from django.utils.decorators import method_decorator
 #from musicboxapp.bing_search import run_query
 
 class HomepageView(View):
@@ -54,7 +54,7 @@ class AddReviewView(View):
         return render(request, 'musicboxapp/add_review.html', context=context)
 
     @method_decorator(login_required)
-    def post(self, request(album_name_slug):
+    def post(self, request, album_name_slug):
         if request.user.is_authenticated:
             form = ReviewForm(request.POST or None)
 
@@ -104,7 +104,7 @@ class AddReviewView(View):
     #     return render(request, 'musicboxapp/add_review.html', context=context_dict)
 
 class DeleteReviewView(View):
-@method_decorator(login_required)
+    @method_decorator(login_required)
     def delete_review(self, request, album_name_slug, review_id):
         if request.user.is_authenticated:
             album = Album.objects.get(slug=album_name_slug)
@@ -141,15 +141,18 @@ class AddCommentView(View):
         return render(request, template, context=context_dict)
 
 
-def search(request):
-    result_list = []
-
-    if request.method == "POST":
-        query = request.POST['query'].strip()
-        if query:
-            result_list = run_query(query)
-
-    return render(request, 'musicboxapp/search.html', {'result_list': result_list})
+class SearchView(View):
+    def search(self, request):
+        pass
+# def search(request):
+#     result_list = []
+#
+#     if request.method == "POST":
+#         query = request.POST['query'].strip()
+#         if query:
+#             result_list = run_query(query)
+#
+#     return render(request, 'musicboxapp/search.html', {'result_list': result_list})
 
 class BrowseView(View):
     def browse(self, request):
@@ -167,6 +170,6 @@ class PopularPageView(View):
     def popular_page(self, request):
         pass
 
-class surprisePageView(View):
+class SurprisePageView(View):
     def surprise_me(request):
         pass

@@ -2,9 +2,9 @@ from django.urls import path
 from musicboxapp import views
 from django.conf import settings
 from django.conf.urls.static import static
-from musicboxapp.views import HomepageView, BrowseView, BrowseGenresView, AlbumView,
-                            AddReviewView, AddCommentView, PopularPageView, DeleteReviewView,
-                            SurprisePageView, TrendingPageView
+from musicboxapp.views import HomepageView, BrowseView, BrowseGenresView, AlbumView, \
+                            AddReviewView, AddCommentView, PopularPageView, DeleteReviewView, \
+                            SurprisePageView, TrendingPageView, SearchView
 
 app_name = 'musicboxapp'
 

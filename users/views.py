@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
-from django.view import View
-from django.utils.decorator import method_decorator
+from django.views import View
+from django.utils.decorators import method_decorator
 
 
 class RegisterView(View):
@@ -28,9 +28,9 @@ class ProfileView(View):
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
 
-    context = {'user_form': user_form, 'profile_form': profile_form}
+        context = {'user_form': user_form, 'profile_form': profile_form}
 
-    return render(request, 'users/profile.html', context=context)
+        return render(request, 'users/profile.html', context=context)
 
     @method_decorator(login_required)
     def post(self, request):
