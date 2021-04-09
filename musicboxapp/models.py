@@ -29,6 +29,7 @@ class Album(models.Model):
     Date_Of_Review = models.ForeignKey('Review', on_delete=models.CASCADE, default=None, null=True)
     Total_Reviews = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
+    popularity = models.FloatField(default=0)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

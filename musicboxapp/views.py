@@ -158,7 +158,7 @@ class AddCommentView(View):
 
         context_dict = {'album': album, 'comment': comment, 'new_comment': new_comment, 'form': form}
         return render(request, template, context=context_dict)
- 
+
 class SearchView(View):
     def get(self, request):
         pass
@@ -184,12 +184,12 @@ class BrowseGenresView(View):
         except Album.DoesNotExist:
             context_dict['album'] = None
 
-        return render(request, 'musicBox/browse_genre.html', context=context_dict)
+        return render(request, 'musicBox/browse_genres.html', context=context_dict)
 
 class TrendingPageView(View):
     def get(self, request):
         try:
-            albums = Album.objects.order_by('-Date_Of_Review', '-Rating')[:6]
+            albums = Album.objects.order_by('-Date_Of_Review')[:6]
             context_dict = {}
             context_dict['albums'] = albums
         except Review.DoesNotExist:
@@ -210,10 +210,21 @@ class PopularPageView(View):
         return response
 
 class SurprisePageView(View):
-    def get(request, review_id):
-        review = Review.objects.get(id=review_id)
-        randompage = random.choice(randompage)
-        return redirect('musicBox:review', page_title=randompage)
+    def get(self, request, review_id):
+
+        try:
+            reviews = Review.objects.get().all()
+        except Review.DoesNotExist:
+            reviews = []
+
+        if len(reviews) > 0:
+            randompage = random.choice(reviews)
+        else:
+            randompage = None
+
+        return redirect('musicboxapp:review', page_title=randompage)
 
 class SearchView(View):
-    pass
+    def get(self, request):
+
+        return render(request, 'musicBox/search.html')
