@@ -45,7 +45,7 @@
 
             <!-- Search bar -->
             <form class="d-flex" method="GET" action="{% url 'musicboxapp:search' %}">
-              <input class="form-control me-2" type="search" placeholder="search for music">
+              <input class="form-control me-2" type="search" placeholder="search for music" name="title">
               <button class="btn btn-outline-success" type="submit" name="button">Search</button>
             </form>
 
@@ -65,7 +65,8 @@
               {% else %}
                 <li class="nav-item">
                   <!-- Are registration and login handled by different pages? -->
-                  <a href="{% url 'login' %}">Login/Signup</a>
+                  <a href="{% url 'login' %}">Login</a>
+                  <a href="{% url 'register' %}">Register</a>                
                 </li>
               {% endif %}
             </ul>
