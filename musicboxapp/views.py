@@ -6,20 +6,23 @@ from datetime import datetime
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.views import View
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 #from musicboxapp.bing_search import run_query
 
 class HomepageView(View):
-    def homepage(self, request):
+    def get(self, request):
         albums_recently_reviewed = Album.objects.order_by('Date_Of_Review')[:3]
+        albums_recently_released = Album.objects.order_by('Release')[:3]
         context_dict = {}
-        context_dict['albums'] = albums_recently_reviewed
+        context_dict['recently_reviewed'] = albums_recently_reviewed
+        context_dict['recent_releases'] = albums_recently_released
 
         response = render(request, 'musicBox/homepage.html', context=context_dict)
         return response
 
 class AlbumView(View):
-    def album(self, request, album_name_slug):
+    def get(self, request, album_name_slug):
         context_dict = {}
 
         try:
@@ -33,6 +36,20 @@ class AlbumView(View):
             context_dict['reviews'] = None
 
         return render(request, 'musicBox/album.html', context=context_dict)
+
+class ReviewView(View):
+    def get(self, request, album_name_slug):
+        context = {}
+
+        try:
+            review = Review.objects.get(Album=album_name_slug)
+        except Album.DoesNotExist:
+            album = None
+
+        if album is None:
+            return redirect('/musicboxapp/')
+
+        context['']
 
 class AddReviewView(View):
     def context_builder(self, album_name_slug):
@@ -142,7 +159,10 @@ class AddCommentView(View):
 
 
 class SearchView(View):
-    def search(self, request):
+    def get(self, request):
+        pass
+
+    def post(self, request):
         pass
 # def search(request):
 #     result_list = []

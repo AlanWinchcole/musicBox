@@ -45,6 +45,7 @@ class Review(models.Model):
     Date_Of_Review = models.DateField(auto_now=False, default=None, null=True)
     Rating = models.FloatField(default=0)
     Review = models.TextField(max_length=1000)
+    Title = models.CharField(max_length=40)
 
     def __str__(self):
         return self.user.username

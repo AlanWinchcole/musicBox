@@ -20,7 +20,6 @@ from django.urls import include
 from musicboxapp import views
 from django.conf import settings
 from django.conf.urls.static import static
-from users import views as user_views
 from users.views import RegisterView, ProfileView
 from musicboxapp.views import HomepageView
 

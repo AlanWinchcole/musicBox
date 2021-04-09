@@ -3,4 +3,100 @@
 {% extends 'musicBox/base.html' %}
 {% load staticfiles %}
 
-<p>Hello World</p>
+{% block body_block %}
+
+<div class="jumbotron p-4">
+  <div class="container">
+    <h2 class="jumbotron-heading">Recently reviewed</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  {% if recently_reviewed %}
+    <div class="row">
+      {% for r in recently_reviewed %}
+      <div class="col-md-4">
+        <div class="card mb-6">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{ MEDIA_URL }}/album_artwork/{{ r.artist }}/{{ r.title }}.jpg"
+                    class="card-img-top" alt="">
+            </div>
+            <div class="row-md-8">
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <p><b>Title:</b>{{ r.title }}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <p><b>Artist:</b>{{ r.artist }}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <p><b>Released:</b>{{ r.release_date }}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <p><b>Genre:</b>{{ r.genre }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% else %}
+    <h3>There are no recent reviews present</h3>
+  {% endif %}
+
+</div>
+
+<div class="jumbotron p-4">
+  <div class="container">
+    <h2 class="jumbotron-heading">Recently released</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  {% if recent_releases %}
+    <div class="row">
+      {% for r in recent_releases %}
+      <div class="col-md-4">
+        <div class="card mb-6">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{ MEDIA_URL }}/album_artwork/{{ r.artist }}/{{ r.title }}.jpg"
+                    class="card-img-top" alt="">
+            </div>
+            <div class="row-md-8">
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <p><b>Title:</b>{{ r.title }}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <p><b>Artist:</b>{{ r.artist }}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <p><b>Released:</b>{{ r.release_date }}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <p><b>Genre:</b>{{ r.genre }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% else %}
+    <h3>There are no recent releases present</h3>
+  {% endif %}
+
+</div>
+
+{% endblock %}

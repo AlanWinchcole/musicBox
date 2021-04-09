@@ -32,7 +32,7 @@
                   <p><b>Genre:</b>{{ album.genre }}</p>
                 </li>
               </ul>
-
+              {% endif %}
             </div>
           </div>
         </div>
@@ -66,16 +66,22 @@
 </div>
 
 {% if album.reviews %}
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-
-
+  {% for review in reviews %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          {{ review.title }}
+        </div>
+        <div class="col-md-4">
+          {{ review.user.username }}
+        </div>
+        <div class="col-md-4">
+          {{ review.rating }}
+        </div>
       </div>
-
     </div>
+  {% endfor %}
 
-  </div>
 {% else %}  <!-- Offer the option to contribute a review -->
 <div class="container">
   <div class="row">
