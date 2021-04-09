@@ -70,7 +70,7 @@ class AddReviewView(View):
     def get(self, request, album_name_slug):
         context = self.context_builder(album_name_slug)
 
-        return render(request, 'music/add_review.html', context=context)
+        return render(request, 'musicBox/add_review.html', context=context)
 
     @method_decorator(login_required)
     def post(self, request, album_name_slug):
@@ -159,14 +159,6 @@ class AddCommentView(View):
         context_dict = {'album': album, 'comment': comment, 'new_comment': new_comment, 'form': form}
         return render(request, template, context=context_dict)
 
-
-class SearchView(View):
-    def get(self, request):
-        pass
-
-    def post(self, request):
-        pass
-
 # def search(request):
 #     result_list = []
 #
@@ -179,21 +171,40 @@ class SearchView(View):
 
 class BrowseGenresView(View):
     def get(self, request):
-        context = {}
+        context_dict = {}
+        try:
+            albums = Album.objects.order_by('Genre')
+            context_dict['album'] = albums
+        except Album.DoesNotExist:
+            context_dict['album'] = None
 
-        return render(request, 'musicBox/browse_genres.html', context=context)
+        return render(request, 'musicBox/browse_genre.html', context=context_dict)
 
 class TrendingPageView(View):
-    def get(self, request):
-        context = {}
+    def trending_page(self, request, review_id):
+        try:
+            review = Review.objects.order_by('-Date_Of_Review', '-Rating')[:6]
+            context_dict = {}
+            context_dict['review'] = review
+        except Review.DoesNotExist:
+            context_dict['review'] = None
 
-        return render(request, 'musicBox/trending.html', context=context)
+        return render(request, 'musicBox/trending_page.html', context=context_dict)
 
 class PopularPageView(View):
-    def get(self, request):
-        context = {}
+    def popular_page(self, request):
+        try:
+            reviews = Review.objects.order_by('-Rating')[:6]
+            context_dict = {}
+            context_dict['review'] = reviews
+        except Review.DoesNotExist:
+            context_dict['review'] = None
 
-        return render(request, 'musicBox/popular.html', context=context)
+        response = render(request, 'musicBox/popular_page.html', context=context_dict)
+        return response
 
 class SurprisePageView(View):
-    pass
+    def surprise_me(request, review_id):
+        review = Review.objects.get(id=review_id)
+        randompage = random.choice(randompage)
+        return redirect('musicBox:review', page_title=randompage)
