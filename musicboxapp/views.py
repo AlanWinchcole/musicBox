@@ -178,41 +178,22 @@ class SearchView(View):
 #     return render(request, 'musicboxapp/search.html', {'result_list': result_list})
 
 class BrowseGenresView(View):
-    def browse_genres(self, request):
-        context_dict = {}
-        try:
-            albums = Album.objects.order_by('Genre')
-            context_dict['album'] = albums
-        except Album.DoesNotExist:
-            context_dict['album'] = None
+    def get(self, request):
+        context = {}
 
-        return render(request, 'musicBox/browse_genre.html', context=context_dict)
+        return render(request, 'musicBox/browse_genres.html', context=context)
 
 class TrendingPageView(View):
-    def trending_page(self, request, review_id):
-        try:
-            review = Review.objects.order_by('-Date_Of_Review', '-Rating')[:6]
-            context_dict = {}
-            context_dict['review'] = review
-        except Review.DoesNotExist:
-            context_dict['review'] = None
+    def get(self, request):
+        context = {}
 
-        return render(request, 'musicBox/trending_page.html', context=context_dict)
+        return render(request, 'musicBox/trending.html', context=context)
 
 class PopularPageView(View):
-    def popular_page(self, request):
-        try:
-            reviews = Review.objects.order_by('-Rating')[:6]
-            context_dict = {}
-            context_dict['review'] = reviews
-        except Review.DoesNotExist:
-            context_dict['review'] = None
+    def get(self, request):
+        context = {}
 
-        response = render(request, 'musicBox/popular_page.html', context=context_dict)
-        return response
+        return render(request, 'musicBox/popular.html', context=context)
 
 class SurprisePageView(View):
-    def surprise_me(request, review_id):
-        review = Review.objects.get(id=review_id)
-        randompage = random.choice(randompage)
-        return redirect('musicBox:review', page_title=randompage)
+    pass

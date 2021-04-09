@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+{% extends 'musicBox/base.html' %}
+{% load staticfiles %}
+
+{% block sidebar_block %}
+
+
+
+{% endblock %}
+
+{% block body_block %}
+
+  {% if genres %}
+
+    {% for genre in genres %}
+
+      <div class="jumbotron p-4">
+        <div class="container">
+          <h2 class="jumbotron-heading">{{ genre }}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        {% if genre %}
+          <div class="row">
+            {% for album in genres.genre %}
+            <div class="col-md-4">
+              <div class="card mb-6">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{{ MEDIA_URL }}/album_artwork/{{ album.artist }}/{{ album.title }}.jpg"
+                          class="card-img-top" alt="">
+                  </div>
+                  <div class="row-md-8">
+                    <div class="card-body">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                          <p><b>Title:</b>{{ album.Title }}</p>
+                        </li>
+                        <li class="list-group-item">
+                          <p><b>Artist:</b>{{ album.Artist }}</p>
+                        </li>
+                        <li class="list-group-item">
+                          <p><b>Released:</b>{{ album.Release }}</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        {% else %}
+          <h3>There are no {{ genre }} albums present</h3>
+        {% endif %}
+
+      </div>
+
+    {% endfor %}
+
+  {% else %}
+
+  <h3>Coudn't find any genres</h3>
+
+  {% endif %}
+
+
+{% endblock %}
