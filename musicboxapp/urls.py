@@ -2,9 +2,7 @@ from django.urls import path
 from musicboxapp import views
 from django.conf import settings
 from django.conf.urls.static import static
-from musicboxapp.views import HomepageView, BrowseView, BrowseGenresView, AlbumView, \
-                            AddReviewView, AddCommentView, PopularPageView, DeleteReviewView, \
-                            SurprisePageView, TrendingPageView, SearchView
+from musicboxapp.views import HomepageView, BrowseView, BrowseGenresView, AlbumView, AddReviewView, AddCommentView, PopularPageView, DeleteReviewView, SurprisePageView, TrendingPageView, SearchView, ReviewView
 
 app_name = 'musicboxapp'
 
@@ -16,7 +14,7 @@ urlpatterns = [
     path('popular/', PopularPageView.as_view(), name='popular'),
     path('surprise/', SurprisePageView.as_view(), name='surprise_me'),
     path('album/<slug:album_name_slug>', AlbumView.as_view(), name='album'),
-    path('album/<sug:album_name_slug>', ReviewView.as_view(), name='review'),
+    path('album/<slug:album_name_slug>', ReviewView.as_view(), name='review'),
     path('album/<slug:album_name_slug>/add_review/', AddReviewView.as_view(), name='add_review'),
     path('album/<slug:album_name_slug>/delete_review/', DeleteReviewView.as_view(), name='delete_review'),
     path('musicboxapp/search/', SearchView.as_view(), name='search'),
