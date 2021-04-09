@@ -181,18 +181,18 @@ class BrowseGenresView(View):
         return render(request, 'musicBox/browse_genre.html', context=context_dict)
 
 class TrendingPageView(View):
-    def trending_page(self, request, review_id):
+    def get(self, request):
         try:
-            review = Review.objects.order_by('-Date_Of_Review', '-Rating')[:6]
+            albums = Album.objects.order_by('-Date_Of_Review', '-Rating')[:6]
             context_dict = {}
-            context_dict['review'] = review
+            context_dict['albums'] = albums
         except Review.DoesNotExist:
-            context_dict['review'] = None
+            context_dict['albums'] = None
 
         return render(request, 'musicBox/trending_page.html', context=context_dict)
 
 class PopularPageView(View):
-    def popular_page(self, request):
+    def get(self, request):
         try:
             reviews = Review.objects.order_by('-Rating')[:6]
             context_dict = {}
@@ -204,7 +204,10 @@ class PopularPageView(View):
         return response
 
 class SurprisePageView(View):
-    def surprise_me(request, review_id):
+    def get(request, review_id):
         review = Review.objects.get(id=review_id)
         randompage = random.choice(randompage)
         return redirect('musicBox:review', page_title=randompage)
+
+class SearchView(View):
+    pass

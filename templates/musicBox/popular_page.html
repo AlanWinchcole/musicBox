@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+{% extends 'musicBox/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+  <div class="jumbotron">
+    <div class="container">
+      <h2 class="jumbotron-heading">Popular</h2>
+    </div>
+  </div>
+
+  {% if albums %}
+
+    <div class="container">
+        <div class="row">
+          {% for album in albums %}
+          <div class="col-md-4">
+            <div class="card mb-6">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="{{ MEDIA_URL }}/album_artwork/{{ album.artist }}/{{ album.title }}.jpg"
+                        class="card-img-top" alt="">
+                </div>
+                <div class="row-md-8">
+                  <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <p><b>Title:</b>{{ album.title }}</p>
+                      </li>
+                      <li class="list-group-item">
+                        <p><b>Artist:</b>{{ album.artist }}</p>
+                      </li>
+                      <li class="list-group-item">
+                        <p><b>Released:</b>{{ album.release_date }}</p>
+                      </li>
+                      <li class="list-group-item">
+                        <p><b>Genre:</b>{{ album.genre }}</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+
+  {% else %}
+    <p class=text-muted>There are no albums present</p>
+  {% endif %}
+
+
+{% endblock %}
