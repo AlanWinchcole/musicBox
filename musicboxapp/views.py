@@ -158,6 +158,12 @@ class AddCommentView(View):
 
         context_dict = {'album': album, 'comment': comment, 'new_comment': new_comment, 'form': form}
         return render(request, template, context=context_dict)
+ 
+class SearchView(View):
+    def get(self, request):
+        pass
+    def post(self, request):
+        pass
 
 # def search(request):
 #     result_list = []
