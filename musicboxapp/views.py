@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.views import View
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+import random
 #from musicboxapp.bing_search import run_query
 
 class HomepageView(View):
