@@ -27,6 +27,7 @@ class Album(models.Model):
     Release = models.DateField(default=None, null=True)
     Genre = models.CharField(max_length=TITLE_MAX_LENGTH, default=None, null=True)
     Date_Of_Review = models.ForeignKey('Review', on_delete=models.CASCADE, default=None, null=True)
+    Total_Reviews = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):

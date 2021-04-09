@@ -39,17 +39,18 @@ class AlbumView(View):
 
 class ReviewView(View):
     def get(self, request, album_name_slug):
-        context = {}
+        context_dict = {}
 
         try:
             review = Review.objects.get(Album=album_name_slug)
+            context_dict['review'] = review
         except Album.DoesNotExist:
             album = None
 
         if album is None:
             return redirect('/musicboxapp/')
 
-        context['']
+        return render(request, 'musicBox/review.html', context=context_dict)
 
 class AddReviewView(View):
     def context_builder(self, album_name_slug):
@@ -68,7 +69,7 @@ class AddReviewView(View):
     def get(self, request, album_name_slug):
         context = self.context_builder(album_name_slug)
 
-        return render(request, 'musicboxapp/add_review.html', context=context)
+        return render(request, 'music/add_review.html', context=context)
 
     @method_decorator(login_required)
     def post(self, request, album_name_slug):
@@ -83,14 +84,14 @@ class AddReviewView(View):
                 review.Album = Album
                 review.save()
 
-                return redirect(reverse('musicboxapp:album', kwargs={'album_name_slug': album_name_slug}))
+                return redirect(reverse('musicBox:album', kwargs={'album_name_slug': album_name_slug}))
             else:
                 print(form.errors)
 
         context = this.context_builder(album_name_slug)
         context['form'] = form
 
-        return render(request, 'musicboxapp/add_review.html', context=context)
+        return render(request, 'musicBox/add_review.html', context=context)
 
     # def add_review(request, album_name_slug):
     #     try:
@@ -130,9 +131,9 @@ class DeleteReviewView(View):
             if request.method == "POST":
                 review.delete()
 
-            return redirect("musicboxapp:album", kwargs={'album_name_slug': album_name_slug})
+            return redirect("musicBox:album", kwargs={'album_name_slug': album_name_slug})
         else:
-            return redirect("accounts:login")
+            return redirect("users:login")
 
 class AddCommentView(View):
     @method_decorator(login_required)
@@ -152,7 +153,7 @@ class AddCommentView(View):
             else:
                 form = CommentForm()
         else:
-            return redirect('accounts:login')
+            return redirect('users:login')
 
         context_dict = {'album': album, 'comment': comment, 'new_comment': new_comment, 'form': form}
         return render(request, template, context=context_dict)
@@ -164,6 +165,7 @@ class SearchView(View):
 
     def post(self, request):
         pass
+
 # def search(request):
 #     result_list = []
 #
