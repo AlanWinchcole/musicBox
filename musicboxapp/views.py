@@ -174,22 +174,23 @@ class SearchView(View):
 #
 #     return render(request, 'musicboxapp/search.html', {'result_list': result_list})
 
-class BrowseView(View):
-    def browse(self, request):
-        pass
-
 class BrowseGenresView(View):
-    def browse_genres(self, request):
-        pass
+    def get(self, request):
+        context = {}
+
+        return render(request, 'musicBox/browse_genres.html', context=context)
 
 class TrendingPageView(View):
-    def trending_page(self, request):
-        pass
+    def get(self, request):
+        context = {}
+
+        return render(request, 'musicBox/trending.html', context=context)
 
 class PopularPageView(View):
-    def popular_page(self, request):
-        pass
+    def get(self, request):
+        context = {}
+
+        return render(request, 'musicBox/popular.html', context=context)
 
 class SurprisePageView(View):
-    def surprise_me(request):
-        pass
+    pass

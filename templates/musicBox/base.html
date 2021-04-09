@@ -18,7 +18,7 @@
   <!-- Header to navigate website -->
   <body>
     <header>
-      <nav class="navbar navbar-expand-md navbar-light bg-light text-dark sticky-top">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark text-light sticky-top">
         <div class="container-fluid">
           <!-- App logo -->
           <a class="navbar-brand" href="{% url 'musicboxapp:homepage' %}">MusicBox</a>
@@ -27,18 +27,18 @@
           </button>
 
           <!-- Browsing options displayed in a dropdown -->
-          <div class="navbar navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <!-- Use .hover here (jQuery) -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{% url 'musicboxapp:browse' %}" id="navbarDropdown" role="button" data-bs-toggle="button">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                   Browse
                 </a>
                 <ul class="dropdown-menu">
                   <li> <a class="dropdown-item" href="{% url 'musicboxapp:genres' %}">Genres</a> </li>
                   <li> <a class="dropdown-item" href="{% url 'musicboxapp:trending' %}">Trending</a> </li>
                   <li> <a class="dropdown-item" href="{% url 'musicboxapp:popular' %}">Most Popular</a> </li>
-                  <li> <a class="dropdown-item" href="{% url 'musicboxapp:surprise_me' %}"></a> </li>
+                  <li> <a class="dropdown-item" href="{% url 'musicboxapp:surprise_me' %}">Random page</a> </li>
                 </ul>
                 <li class=""></li>
             </ul>
@@ -91,6 +91,5 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="https://getbootstrap.com/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
   </body>
 </html>
